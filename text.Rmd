@@ -1,0 +1,22 @@
+---
+title: "Text Analysis Report"
+author: "Ben Gonzalez"
+date: "May 6, 2019"
+output: pdf_document
+params:
+  s: NA
+  l: NA
+  q: NA
+  z: NA
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Text Analysis Report
+
+```{r echo=FALSE}
+params$s
+```
+

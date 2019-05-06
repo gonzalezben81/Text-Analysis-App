@@ -63,6 +63,8 @@ ui <- dashboardPage(skin = "blue",
                         #menuItem("Sentence Sentiment",tabName = "sentencefinder",icon = icon("table")),
                         ##Works Cited
                         menuItem("References:",tabName = "workscited"),
+                        ##Text Analysis Report
+                        menuItem("Text Analysis Report",tabName = 'analysisreport'),
                         ##Contact:
                         menuItem("Contact:",tabName = "contact"),
                         ##Digital Ocean Credit
@@ -286,6 +288,9 @@ ui <- dashboardPage(skin = "blue",
                                     br(),
                                     downloadButton("downloadtwo", label="Download Word Breakdown")),
                                 DT::dataTableOutput("wordbreakdown")),
+                        ###Text Analysis Report Tab #####
+                        tabItem(tabName = "analysisreport",
+                                downloadButton(outputId = "text_report",label = "Download Text Analysis Report")),
                         ###Works Cite ####
                         tabItem(tabName = "workscited",
                                 helpText(strong("                                     References :"),
@@ -1152,6 +1157,49 @@ server <- function(input, output, session) {
       file.copy(datasetromeo(), file)
     },
     contentType = "text"
+  )
+  
+  
+  
+  output$text_report<- downloadHandler(
+    filename = function() {
+      paste('Text Analysis Report','pdf', sep = '.')
+    },
+    
+    
+    
+    
+    content = function(file) {
+      src <- normalizePath('./text.Rmd')
+      # src2 <- normalizePath('ChemDiVo Results COA.png') #NEW
+      # temporarily switch to the temp dir, in case you do not have write
+      # permission to the current working directory
+      # owd <- setwd(tempdir())
+      # on.exit(setwd(owd))
+      # file.copy(src, './report.Rmd', overwrite = TRUE)
+      
+      textReport <- file.path(tempdir(), "./text.Rmd")
+      # tempPictures <- file.path(tempdir(), "./ChemDiVo Results COA.png")
+      file.copy("./text.Rmd", textReport, overwrite = TRUE)
+      # file.copy("./ChemDiVo Results COA.png",tempPictures,overwrite = TRUE) #NEW
+      
+      
+      library(rmarkdown)
+      out <- render(input = 'text.Rmd',output_format = pdf_document()
+                    #               switch(
+                    # input$format,
+                    # PDF = pdf_document(), HTML = html_document(), Word = word_document()
+      )
+      file.rename(out, file)
+      
+      #     # Set up parameters to pass to Rmd document
+      params <- list(s = texterdf3())
+      rmarkdown::render(tempReporters, output_file = file,
+                        params = params,
+                        envir = new.env(parent = globalenv())
+      )
+      
+    }
   )
   
 }
