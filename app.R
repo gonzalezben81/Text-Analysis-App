@@ -2444,7 +2444,7 @@ server <- function(input, output, session) {
     
     content = function(file) {
       src <- normalizePath('./text.Rmd')
-      # src2 <- normalizePath('ChemDiVo Results COA.png') #NEW
+
       # temporarily switch to the temp dir, in case you do not have write
       # permission to the current working directory
       # owd <- setwd(tempdir())
@@ -2452,9 +2452,9 @@ server <- function(input, output, session) {
       # file.copy(src, './report.Rmd', overwrite = TRUE)
       
       textReport <- file.path(tempdir(), "./text.Rmd")
-      # tempPictures <- file.path(tempdir(), "./ChemDiVo Results COA.png")
+
       file.copy("./text.Rmd", textReport, overwrite = TRUE)
-      # file.copy("./ChemDiVo Results COA.png",tempPictures,overwrite = TRUE) #NEW
+
       
       
       library(rmarkdown)

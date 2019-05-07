@@ -1,7 +1,7 @@
 ---
 title: "Text Analysis Report"
 author: "Ben Gonzalez"
-date: "May 6, 2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 params:
   s: NA
@@ -16,14 +16,18 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Text Analysis Report
 
-```{r echo=FALSE}
-plot(pressure)
-```
 
 ```{r}
 words<- params$s
 kable(words) %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"))%>%
   scroll_box(width = "1000px", height = "500px")
+```
+
+```{r, layout="l-body-outset"}
+library(rmarkdown)
+words_two <- params$s
+words_two <- as.data.frame(words_two)
+paged_table(words_two, options = list(rows.print = 15))
 ```
 
