@@ -1,0 +1,29 @@
+---
+title: "Text Analysis Report"
+author: "Ben Gonzalez"
+date: "May 6, 2019"
+output: html_document
+params:
+  s: NA
+  l: NA
+  q: NA
+  z: NA
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Text Analysis Report
+
+```{r echo=FALSE}
+plot(pressure)
+```
+
+```{r}
+words<- params$s
+kable(words) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))%>%
+  scroll_box(width = "1000px", height = "500px")
+```
+
