@@ -6,6 +6,8 @@
 #
 #    http://shiny.rstudio.com/
 #
+#
+
 
 library(shiny)
 library(scales)
@@ -31,9 +33,11 @@ othello <- readLines("othello.txt")
 midsummers <- readLines("midsummers.txt")
 
 ui <- dashboardPage(skin = "blue",
-                    # skin = "green",
                     dashboardHeader(title = "Text Analysis"),
                     dashboardSidebar(
+                      tags$a(HTML(
+                        "<a href='https://github.com/you'><img width='149' height='149' src='https://github.blog/wp-content/uploads/2008/12/forkme_left_green_007200.png?resize=149%2C149' class='attachment-full size-full' alt='Fork me on GitHub' data-recalc-dims='1'></a>"
+                      )),
                       # actionButton("display","Display Text"),
                       sidebarMenu(
                         ##Tab One
